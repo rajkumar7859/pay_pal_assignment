@@ -26,7 +26,7 @@ const Login = () => {
           else {
             setErrorMessage("");
             localStorage.setItem('token', response.data.token);
-            console.log("user" , response.data)
+            // console.log("user" , response.data)
             alert("User Login successful")
             navigate("/")
             
@@ -35,7 +35,7 @@ const Login = () => {
           console.error(err);
           if(err.response.status===401)
         {
-            console.log("error", err.response.status)
+            // console.log("error", err.response.status)
             return setErrorMessage(err.response.data.message)
         }
           else

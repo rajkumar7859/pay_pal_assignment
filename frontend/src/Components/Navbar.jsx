@@ -41,7 +41,7 @@ const Navbar = () => {
                         <Link to="/">Home</Link>
                     </li>
                     <li className="text-white hover:text-indigo-200">
-                        <Link to="#">Blog</Link>
+                        <Link to="/taskform">Create Task</Link>
                     </li>
                     <li className="text-white hover:text-indigo-200">
                         <Link to="#">About US</Link>
@@ -53,13 +53,13 @@ const Navbar = () => {
 
                 <div className="mt-3 space-y-2 lg:hidden md:inline-block">
             <Link
-                to="#"
+                to="/login"
                 className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
             >
                 Sign in
             </Link>
             <Link
-                to="#"
+                to="/signup"
                 className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
             >
                 Sign up

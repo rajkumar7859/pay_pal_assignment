@@ -28,7 +28,7 @@ const SignUp = () => {
          
           else {
             setErrorMessage("");
-            console.log("user" , response.data)
+            // console.log("user" , response.data)
             alert("User register Successfully")
             navigate("/login")
           }
@@ -36,7 +36,7 @@ const SignUp = () => {
           console.error(err);
           if(err.response.status===409)
         {
-            console.log("error", err.response.status)
+            // console.log("error", err.response.status)
             return setErrorMessage("User is already register")
         }
           else
