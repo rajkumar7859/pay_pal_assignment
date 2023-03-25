@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {CgClose} from "react-icons/cg"
+
 
 
 const TaskForm = () => {
@@ -69,6 +71,7 @@ const TaskForm = () => {
       setAssignee("");
       setSprint("");
       setStatus("todo");
+      setOpenModal(false)
       alert("Task created successfully")
       console.log("data" , tasks)
     } catch (error) {
@@ -132,19 +135,20 @@ const TaskForm = () => {
   return (
     <div className="container mx-auto">
 
-        <button type="" onClick={()=>setOpenModal(!openModal)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-blue focus:shadow-outline">Add Task</button>
+        <button  onClick={()=>setOpenModal(!openModal)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-blue focus:shadow-outline">Add Task</button>
 {
     openModal?(
-        <div >
-        <div>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div className="relative mx-auto w-[80%] shadow-lg rounded-md">
     <form
-        className="bg-white shadow-md rounded w-[70%] m-auto mt-8 px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-md rounded m-auto mt-8 px-8 pt-6 pb-8 mb-4"
         onSubmit={(e) => {
             e.preventDefault();
             selectedTask ? updateTask() : createTask();
         }}
       >
-        <h1 className="text-3xl font-bold my-8 ">Task Manager</h1>
+        <button className="text-[2rem] ml-[98%]" onClick={()=>setOpenModal(!openModal)}><CgClose /></button>
+        <h1 className="text-3xl font-bold  mb-8 ">Task Manager</h1> 
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="title">
             Title
@@ -253,7 +257,32 @@ const TaskForm = () => {
       </form>
       </div>
       </div>
-      ):""
+      ):(
+        tasks?.map((task)=>
+        <div key={task._id}>
+            <div className="bg-white shadow-md rounded-lg w-full md:w-1/2 lg:w-1/3 m-4">
+      <div className="p-4">
+        <h2 className="text-2xl font-bold">{task.title}</h2>
+        <p className="text-gray-700 mt-2">{task.description}</p>
+      </div>
+      <div className="flex justify-end p-4">
+        <button
+          onClick={"onEdit"}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+        >
+          Edit
+        </button>
+        <button
+          onClick={"onDelete"}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+        </div>
+        )
+      )
 }
     </div>
   );
